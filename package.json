@@ -2,13 +2,13 @@
   "name": "searchanator",
   "version": "1.0.0",
   "description": "search for something within multiple arrays",
-  "main": "searchanator.min.js",
+  "main": "dist/main.js",
   "scripts": {
     "tests": "karma start karma.single.config.js",
     "test": "npm run tests",
     "test:watch": "npm run tests:watch",
     "tests:watch": "karma start karma.watch.config.js",
-    "build": "set NODE_ENV=production npm run tests && webpack --config webpack.prod.config.js --progress --colors"
+    "build": "NODE_ENV=production npm run tests && babel src --out-dir dist"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
     "url": "https://github.com/Gwash3189/searchanator/issues"
   },
   "devDependencies": {
+    "babel": "^5.2.9",
     "babel-core": "^5.2.7",
     "babel-loader": "^5.0.0",
     "chai": "^2.2.0",
