@@ -18,6 +18,16 @@ A string with the value you are searching for
 ## Options
 An object that defines the default property to search by, and whether or not you want to search by property
 
+```
+{
+	getSearchTerm: function(modelBeingSearch){
+		return modelBeingSearch.propertyIWantToSearchOn
+	},
+	searchProperties: true // Defaults to true
+	// allows you to search via property ("age: 15, name: 'Joe'")
+}
+```
+
 ## searchableArrays
 The arrays you want to search
 
@@ -42,8 +52,11 @@ console.log(result) // [{name: "hello"}];
 In addition to the usage above, you can also search via object properties. 
 
 ```
-var searchanatorOptions = function(modelBeingSearch){
-	return x.name;
+var searchanatorOptions = {
+	getSearchTerm: function(x){
+		return x.name;
+	},
+	searchProperties: true // defaults to true
 };
 var searchanator = require("searchanator");
 
@@ -111,7 +124,6 @@ searchable.mixin(..., Action.search)
 var Action = Reflux.createActions(["search"]);
 
 var Store = Reflux.createStore({...})
-searchable.mixin(Store.listen,...);
 
 searchable.mixin(Store.listen Action.search)
 
