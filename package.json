@@ -1,6 +1,6 @@
 {
   "name": "searchanator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "search for something within multiple arrays",
   "main": "dist/main.js",
   "scripts": {
