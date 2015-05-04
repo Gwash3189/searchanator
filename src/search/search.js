@@ -24,9 +24,9 @@ var Searchanator = function(searchTerm, options, ...arrays) {
         var results = [];
         getSearchTerms(searchTerm)
             .forEach(x => {
-                lst = results.concat(searchForValueOnProps(listToUse, x));
+                results = results.concat(searchForValueOnProps(listToUse, x));
             });
-        return lst;
+        return results;
     } else {
         searchValue = searchTerm;
         lst = listToUse.filter(x => {
@@ -42,12 +42,11 @@ var Searchanator = function(searchTerm, options, ...arrays) {
     }
 
     function getSearchTerms(value) {
-        var replaceColonAndSpaceRegEx = /[:]\s*/g;
-        var replaceWith = ":";
-        var splitByFirst = " ";
+        var replaceColonAndSpaceRegEx = /([,|\;]\s*)|\s/g;
+        var splitByText = "SPLITBYTEXT";
         var splitBySecond = ":";
-        return value.replace(replaceColonAndSpaceRegEx, replaceWith)
-            .split(splitByFirst)
+        return value.replace(replaceColonAndSpaceRegEx, splitByText)
+            .split(splitByText)
             .map(x => {
                 var t = x.split(splitBySecond);
                 return complexSearchMixin({
