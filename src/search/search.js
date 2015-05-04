@@ -1,0 +1,87 @@
+function flatMap(arrofArrays) {
+    return [].concat.apply([], arrofArrays);
+};
+
+function restArgumentsFlatMap(arrays) {
+    return flatMap(flatMap(arrays));
+};
+
+function complexSearchMixin(obj) {
+    var o = {};
+    o.search = obj.search || "";
+    o.property = obj.property || "";
+    return o;
+};
+var Searchanator = function(searchTerm, options, ...arrays) {
+    var searchValue;
+    var lst
+    var listToUse = restArgumentsFlatMap(arrays);
+    var searchTerm;
+    if (searchTerm == null || listToUse.length === 0) {
+        return [];
+    }
+    if (options && (options.searchProperties === true || options.searchProperties === undefined) && searchTerm.indexOf(":") > 0) {
+        var results = [];
+        getSearchTerms(searchTerm)
+            .forEach(x => {
+                lst = results.concat(searchForValueOnProps(listToUse, x));
+            });
+        return lst;
+    } else {
+        searchValue = searchTerm;
+        lst = listToUse.filter(x => {
+            if (isExactMatch(options.getSearchTerm(x)
+                    .toLowerCase(), searchValue.toLowerCase())) {
+                return true;
+            } else if (containsPredicate(options.getSearchTerm(x)
+                    .toLowerCase(), searchValue.toLowerCase())) {
+                return true;
+            }
+        });
+        return lst;
+    }
+
+    function getSearchTerms(value) {
+        var replaceColonAndSpaceRegEx = /[:]\s*/g;
+        var replaceWith = ":";
+        var splitByFirst = " ";
+        var splitBySecond = ":";
+        return value.replace(replaceColonAndSpaceRegEx, replaceWith)
+            .split(splitByFirst)
+            .map(x => {
+                var t = x.split(splitBySecond);
+                return complexSearchMixin({
+                    property: t[0],
+                    search: t[1]
+                });
+            });
+    };
+
+    function isExactMatch(mustMatch, check) {
+        return mustMatch === check;
+    }
+
+    function containsPredicate(mustMatch, check) {
+        return mustMatch.indexOf(check) > -1;
+    }
+
+    function searchForValueOnProps(list, complexSearchMixin) {
+        return list.filter((player) => {
+            var validProps = Object.keys(player)
+                .filter(x => {
+                    return x.toLowerCase() === complexSearchMixin.property.toLowerCase();
+                });
+            return validProps.some(validPlayerProp => {
+                if (player[complexSearchMixin.property.toLowerCase()].toString()
+                    .toLowerCase() === complexSearchMixin.search.toLowerCase()) {
+                    return true;
+                }
+            });
+
+        });
+    }
+
+}
+
+
+module.exports = Searchanator;

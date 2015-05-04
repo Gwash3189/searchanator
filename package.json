@@ -1,0 +1,46 @@
+{
+  "name": "searchanator",
+  "version": "1.0.0",
+  "description": "search for something within multiple arrays",
+  "main": "searchanator.min.js",
+  "scripts": {
+    "tests": "karma start karma.single.config.js",
+    "test": "npm run tests",
+    "test:watch": "npm run tests:watch",
+    "tests:watch": "karma start karma.watch.config.js",
+    "build": "set NODE_ENV=production npm run tests && webpack --config webpack.prod.config.js --progress --colors"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gwash3189/searchanator.git"
+  },
+  "keywords": [
+    "search",
+    "searching",
+    "searchable",
+    "multiple",
+    "array",
+    "search"
+  ],
+  "author": "Adam Beck",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Gwash3189/searchanator/issues"
+  },
+  "devDependencies": {
+    "babel-core": "^5.2.7",
+    "babel-loader": "^5.0.0",
+    "chai": "^2.2.0",
+    "file": "^0.2.2",
+    "karma": "^0.12.31",
+    "karma-chrome-launcher": "^0.1.8",
+    "karma-cli": "0.0.4",
+    "karma-mocha": "^0.1.10",
+    "karma-sourcemap-loader": "^0.3.4",
+    "karma-webpack": "^1.5.0",
+    "mocha": "^2.2.4",
+    "sinon": "git://github.com/cjohansen/Sinon.JS#sinon-2.0",
+    "webpack": "^1.8.9"
+  },
+  "homepage": "https://github.com/Gwash3189/searchanator"
+}
