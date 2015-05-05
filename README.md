@@ -34,9 +34,13 @@ The arrays you want to search
 #Example
 
 ```
-var searchanatorOptions = function(modelBeingSearch){
-	return x.name;
-};
+var searchanatorOptions = {
+	getSearchTerm: function(modelBeingSearch){
+		return modelBeingSearch.name;
+	},
+	searchProperties: true // Defaults to true
+	// allows you to search via property ("age: 15, name: 'Joe'")
+}
 var searchanator = require("searchanator");
 
 var result = searchanator.search("hello", searchanatorOptions, [{name: "hello"}, {name: "bye"}]);
