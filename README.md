@@ -76,9 +76,13 @@ You can also chain the property searches
 
 ```
 
-var searchanatorOptions = function(modelBeingSearch){
-	return x.name;
-};
+var searchanatorOptions = {
+	getSearchTerm: function(x){
+		return x.name
+	},
+	searchProperties: true // Defaults to true
+	// allows you to search via property ("age: 15, name: 'Joe'")
+}
 var searchanator = require("searchanator");
 
 var result = searchanator.search("name:hello, age: 15", searchanatorOptions, [{name: "hello", age: 15}, {name: "bye", age: 47}]);
