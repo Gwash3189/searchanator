@@ -26,7 +26,7 @@ var Searchanator = function Searchanator(searchTerm, options) {
     if (searchTerm == null || listToUse.length === 0) {
         return [];
     }
-    if (options && (options.searchProperties === true || options.searchProperties === undefined) && searchTerm.indexOf(":") > 0) {
+    if (options && (options.searchProperties === true || options.searchProperties === undefined) && searchTerm.toString().indexOf(":") > 0) {
         var results = [];
         getSearchTerms(searchTerm).forEach(function (x) {
             results = results.concat(searchForValueOnProps(listToUse, x));
@@ -35,9 +35,9 @@ var Searchanator = function Searchanator(searchTerm, options) {
     } else {
         searchValue = searchTerm;
         lst = listToUse.filter(function (x) {
-            if (isExactMatch(options.getSearchTerm(x).toLowerCase(), searchValue.toLowerCase())) {
+            if (isExactMatch(options.getSearchTerm(x).toString().toLowerCase(), searchValue.toString().toLowerCase())) {
                 return true;
-            } else if (containsPredicate(options.getSearchTerm(x).toLowerCase(), searchValue.toLowerCase())) {
+            } else if (containsPredicate(options.getSearchTerm(x).toString().toLowerCase(), searchValue.toString().toLowerCase())) {
                 return true;
             }
         });
