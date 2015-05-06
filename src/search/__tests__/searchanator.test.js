@@ -1,7 +1,7 @@
 var search = require("../search.js");
 var { expect } = require("chai");
 var mockName = "hello";
-var mockAge = 14;
+var mockAge = 15;
 var mockObjectSearch = "name:" + mockName;
 var mockAgeSearch = "age: " + mockAge;
 var mockChainedObjectSearch = mockObjectSearch + " ," + mockAgeSearch;
@@ -9,10 +9,11 @@ var mockSearchTerm = mockName;
 var mockSearchArray = [{name: mockName, age: 15}];
 var mockMultiSearchArray = [[{name: mockName, age: 15}], [{name: mockName, age: 47}]];
 var mockOptions = {
-	getSearchTerm: (x) => {
-		return x.name
-	}
+	getSearchTerm: x => x.name
 }
+var mockSearchByNumberOptions = {
+	getSearchTerm: x => x.age
+};
 
 describe('Searchanator', function () {
 	it('Should be a function', function () {
@@ -44,6 +45,11 @@ describe('Searchanator', function () {
 				expect(search(mockSearchTerm, mockOptions, mockMultiSearchArray)[0].name).to.equal(mockName);
 				expect(search(mockSearchTerm, mockOptions, mockMultiSearchArray)[1].name).to.equal(mockName);
 			});
+		});
+	});
+	describe('With a search term of ' + mockAge , function () {
+		it('Should return the correct object', function () {
+			expect(search(mockAge, mockSearchByNumberOptions, mockMultiSearchArray)[0].name).to.equal(mockName);
 		});
 	});
 	

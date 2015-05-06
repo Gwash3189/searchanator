@@ -20,7 +20,7 @@ var Searchanator = function(searchTerm, options, ...arrays) {
     if (searchTerm == null || listToUse.length === 0) {
         return [];
     }
-    if (options && (options.searchProperties === true || options.searchProperties === undefined) && searchTerm.indexOf(":") > 0) {
+    if (options && (options.searchProperties === true || options.searchProperties === undefined) && (searchTerm.toString()).indexOf(":") > 0) {
         var results = [];
         getSearchTerms(searchTerm)
             .forEach(x => {
@@ -30,11 +30,11 @@ var Searchanator = function(searchTerm, options, ...arrays) {
     } else {
         searchValue = searchTerm;
         lst = listToUse.filter(x => {
-            if (isExactMatch(options.getSearchTerm(x)
-                    .toLowerCase(), searchValue.toLowerCase())) {
+            if (isExactMatch((options.getSearchTerm(x)).toString()
+                    .toLowerCase(), searchValue.toString().toLowerCase())) {
                 return true;
             } else if (containsPredicate(options.getSearchTerm(x)
-                    .toLowerCase(), searchValue.toLowerCase())) {
+                                .toString().toLowerCase(), searchValue.toString().toLowerCase())) {
                 return true;
             }
         });

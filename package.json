@@ -1,6 +1,6 @@
 {
   "name": "searchanator",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "search for something within multiple arrays",
   "main": "dist/main.js",
   "scripts": {
@@ -8,7 +8,8 @@
     "test": "npm run tests",
     "test:watch": "npm run tests:watch",
     "tests:watch": "karma start karma.watch.config.js",
-    "build": "NODE_ENV=production npm run tests && babel src --out-dir dist"
+    "build": "NODE_ENV=production npm run tests && babel src --out-dir dist",
+    "build:windows": "set NODE_ENV=production &&  npm run tests && babel src --out-dir dist"
   },
   "repository": {
     "type": "git",
