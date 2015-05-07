@@ -2,8 +2,11 @@ function flatMap(arrofArrays) {
     return [].concat.apply([], arrofArrays);
 };
 
-function restArgumentsFlatMap(arrays) {
-    return flatMap(flatMap(arrays));
+function restArgumentsFlatMap(arr) {
+    debugger;
+    return arr.reduce(function (flat, toFlatten) {
+        return flat.concat(Array.isArray(toFlatten) ? restArgumentsFlatMap(toFlatten) : toFlatten);
+      }, [])
 };
 
 function complexSearchMixin(obj) {
