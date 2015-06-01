@@ -6,7 +6,7 @@ There have been many a time where i have one, or multiple, arrays where i want t
 
 # Usage
 
-```
+```javascript
 searchanator.search(searchTerm: string, options: object, ...searchableArrays);
 
 ```
@@ -18,7 +18,7 @@ A string with the value you are searching for
 ## Options
 An object that defines the default property to search by, and whether or not you want to search by property
 
-```
+```javascript
 {
 	getSearchTerm: function(modelBeingSearch){
 		return modelBeingSearch.propertyIWantToSearchOn
@@ -33,7 +33,7 @@ The arrays you want to search
 
 #Example
 
-```
+```javascript
 var searchanatorOptions = {
 	getSearchTerm: function(modelBeingSearch){
 		return modelBeingSearch.name;
@@ -55,7 +55,7 @@ console.log(result) // [{name: "hello"}];
 
 In addition to the usage above, you can also search via object properties. 
 
-```
+```javascript
 var searchanatorOptions = {
 	getSearchTerm: function(x){
 		return x.name;
@@ -74,7 +74,7 @@ console.log(result) // [{name: "hello"}];
 
 You can also chain the property searches 
 
-```
+```javascript
 
 var searchanatorOptions = {
 	getSearchTerm: function(x){
@@ -97,7 +97,7 @@ Searchanator also comes with a react.js mixin
 
 ## Usage
 
-```
+```javascript
 searchanator.mixin(listener: function, publisher: function): object;
 ```
 
@@ -110,7 +110,7 @@ the mixin function accepts a listener function, and a publisher function. This i
 This parameter is a function and is passed a function. So if you were using Reflux, then you could do the following 
 
 
-```
+```javascript
 var Store = Reflux.createStore({...})
 searchable.mixin(Store.listen,...)
 
@@ -119,7 +119,7 @@ searchable.mixin(Store.listen,...)
 ### Publish
 Just like the listener, this parameter is also a function, and is passed the result of the `.search` function. If you were using Reflux, you could do the following.
 
-```
+```javascript
 var Action = Reflux.createActions(["search"]);
 
 searchable.mixin(..., Action.search)
@@ -128,7 +128,7 @@ searchable.mixin(..., Action.search)
 
 ### Putting it all together
 
-```
+```javascript
 var Action = Reflux.createActions(["search"]);
 
 var Store = Reflux.createStore({...})
